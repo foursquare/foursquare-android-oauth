@@ -1,0 +1,19 @@
+# Anrdoid
+bin/
+gen/
+
+# Eclipse project files
+.project
+.classpath
+.settings
+.properties
+.metadata
+
+# IntelliJ project files
+*.iml
+.idea
+classes
+
+# others
+.DS_Store
+tmp
