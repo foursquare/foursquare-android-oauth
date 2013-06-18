@@ -1,6 +1,6 @@
 foursquare-android-native-oauth
 ===============================
-Foursquare native oauth makes it easier for users of your app to connect to Foursquare. If the user already has Foursquare installed on their device, it will use their existing credentials from the app instead of presenting the user with another login screen.
+Foursquare native authentication makes it easier for your app's users to connect with Foursquare. Unlike web-based OAuth, native authentication re-uses the Foursquare app's user credentials, saving users the hassle of re-logging in to Foursquare within your app.
 
 This repo includes an Android library that can be used in your own app. It also includes a simple application as an example of how to use the library.
 
