@@ -56,7 +56,7 @@ The `AuthCodeResponse` object has two members:
     * `FoursquareInternalErrorException` - An internal error occurred during authorization. Call `exception.getCause()` to inspect the original cause of the exception.
 
 #### Obtaining an access token
-*WARNING:* For security reasons, it is recommended that you not use the following method if possible. You should pass the returned access code to your own server and have it contact the Foursquare server to convert the code to an access token instead of including your client secret in your app's binary. However, this helper method is provided for you to use if this is not possible for your app.
+*WARNING:* For security reasons, it is recommended that you not use the following method if possible. You should pass the returned access code to your own server and have it contact the Foursquare server to [convert the code to an access token](https://developer.foursquare.com/overview/auth#code) instead of including your client secret in your app's binary. However, this helper method is provided for you to use if this is not possible for your app.
 
 Add the `TokenExchangeActivity` to your `AndroidManifest.xml`
 ```xml
