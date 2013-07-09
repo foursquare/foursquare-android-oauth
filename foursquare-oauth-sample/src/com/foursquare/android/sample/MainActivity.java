@@ -49,8 +49,8 @@ public class MainActivity extends FragmentActivity {
      * Obtain your client id and secret from: 
      * https://foursquare.com/developers/apps
      */
-    private static final String CLIENT_ID = "XEP2JYKRCXFORVULHKST5B5RHTLUK5BRV4M03JSTENJ5IY4Y";
-    private static final String CLIENT_SECRET = "JHRZNR2W3XQ3WZCW1AK4GRPI4H3EBD2GEDCPGSCRP331MPCV";
+    private static final String CLIENT_ID = "YOUR_CLIENT_ID_HERE";
+    private static final String CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

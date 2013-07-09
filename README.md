@@ -6,10 +6,15 @@ This repo includes an Android library that can be used in your own app. It also 
 
 Setting up your app
 ====================
-1. Visit https://foursquare.com/developers/apps
+1. Visit <a href="https://foursquare.com/developers/apps" target="_blank">https://foursquare.com/developers/apps</a>
 2. Create a new app or select from the list of apps that you have created.
-3. Copy the client id and secret as a string into your project. For security reasons, you should encrypt or obfuscate the id and secret with method of your own choice.
-4. Include the internet permission block in your app's `AndroidManifest.xml`
+3. Generate a key hash of your developer certificate using this command: ```keytool -list -v -keystore mystore.keystore```
+4. Paste the generated key hash into the Foursquare app console: 
+![screenshot](http://f.cl.ly/items/123k1N351y1q3B2v0v1f/Screen%20Shot%202013-07-09%20at%204.28.05%20PM.png)
+5. Note that you can add multiple key hashes delimited by commas.
+6. Click "Save Changes".
+7. Copy the client id and secret as a string into your project. For security reasons, you should encrypt or obfuscate the id and secret.
+8. Include the internet permission in your app's `AndroidManifest.xml` file.
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
@@ -18,7 +23,7 @@ Setting up your app
 Setting up the library with your app
 ====================================
 1. In your Eclipse workspace, select `File -> Import -> Android -> Existing Android Code into Workspace -> Finish`,
-then locate the directory of the `foursquare-android-native-oauth` folder. From the Import Projects prompt, make sure to check the `library` project for import.
+then locate the directory of the `foursquare-android-oauth` folder. From the Import Projects prompt, make sure to check the `library` project for import.
 2. Open your project's properties page, select `Android` on the left panel.
 3. Under the `library` section, select `Add -> fsq-oauth-library -> OK`.
 

@@ -18,14 +18,19 @@ package com.foursquare.android.nativeoauth;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.content.pm.Signature;
 import android.net.Uri;
 import android.text.TextUtils;
 
 import com.foursquare.android.nativeoauth.model.AccessTokenResponse;
 import com.foursquare.android.nativeoauth.model.AuthCodeResponse;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -49,10 +54,10 @@ public final class FoursquareOAuth {
     private static final String INTENT_RESULT_ERROR_MESSAGE = PACKAGE
             + ".fragments.OauthWebviewFragment.INTENT_RESULT_ERROR_MESSAGE";
 
-    private static final String URI_SCHEME = "fsqauth";
+    private static final String URI_SCHEME = "foursquareauth";
     private static final String URI_AUTHORITY = "authorize";
     private static final String PARAM_CLIENT_ID = "client_id";
-//    private static final String PARAM_SIGNATURE = "signature";
+    private static final String PARAM_SIGNATURE = "androidKeyHash";
     private static final String PARAM_VERSION = "v";
     
     private static final String URI_MARKET_PAGE = "market://details?id=com.joelapenna.foursquared";
@@ -78,9 +83,7 @@ public final class FoursquareOAuth {
         builder.authority(URI_AUTHORITY);
         builder.appendQueryParameter(PARAM_CLIENT_ID, clientId);
         builder.appendQueryParameter(PARAM_VERSION, String.valueOf(LIB_VERSION));
-        
-        // TODO: Add app signature as param, server needs to support multiple signatures.
-//        builder.appendQueryParameter(PARAM_SIGNATURE, value);
+        builder.appendQueryParameter(PARAM_SIGNATURE, getSignatureFingerprint(context));
         
         Intent intent = new Intent(Intent.ACTION_VIEW, builder.build());
         if (isIntentAvailable(context, intent)) {
@@ -205,5 +208,48 @@ public final class FoursquareOAuth {
                 intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         return resolveInfo.size() > 0;
+    }
+    
+    private static String getSignatureFingerprint(Context context) {
+        String callingPackage = context.getApplicationContext().getPackageName();
+        PackageManager pm = context.getPackageManager();
+        int flags = PackageManager.GET_SIGNATURES;
+
+        PackageInfo callingPackageInfo = null;
+        try {
+            callingPackageInfo = pm.getPackageInfo(callingPackage, flags);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    
+        if (callingPackageInfo != null ){
+            Signature[] signatures = callingPackageInfo.signatures;
+            if (signatures != null && signatures.length > 0) {
+                byte[] cert = signatures[0].toByteArray();
+        
+                try {
+                    MessageDigest md = MessageDigest.getInstance("SHA1");
+                    byte[] fingerprint = md.digest(cert);
+        
+                    StringBuffer hexString = new StringBuffer();
+                    for (int i = 0; i < fingerprint.length; i++) {
+                        String appendString = Integer.toHexString(0xFF & fingerprint[i]);
+                        if (hexString.length() > 0) {
+                            hexString.append(":");
+                        }
+                        if (appendString.length() == 1) hexString.append("0");
+                        hexString.append(appendString);
+                    }
+        
+                    String signature = hexString.toString().toUpperCase(); 
+                    return signature;
+        
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 }

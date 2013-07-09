@@ -24,9 +24,12 @@
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/connected_to_foursquare" 
-        android:textSize="22sp"
-        android:textColor="#222" />
+        android:gravity="center"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:text="@string/connected_to_foursquare"
+        android:textColor="#222"
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/btnLogin"

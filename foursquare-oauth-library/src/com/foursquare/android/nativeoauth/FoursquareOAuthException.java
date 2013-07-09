@@ -29,6 +29,7 @@ public class FoursquareOAuthException extends Exception {
 
     public FoursquareOAuthException(String errorCode) {
         super("An error occurred during authorization.");
+        mErrorCode = errorCode;
     }
 
     public FoursquareOAuthException(Throwable throwable) {
