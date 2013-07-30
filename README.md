@@ -32,7 +32,7 @@ then locate the directory of the `foursquare-android-oauth` folder. From the Imp
 Using FoursquareOAuth
 =============
 #### Obtaining an access code
-Call `FoursquareOAuth.getConnectIntent()` with your application's client id to retrieve an intent that starts the Foursquare app for authentication. If the user doesn't have the app installed, or has an incompatible version installed, an intent that opens the Foursquare app page on Google Play is returned. Then call the `startActivityForResult()` method with the retrieved intent.
+Call `FoursquareOAuth.getConnectIntent()` with your application's client id to retrieve an intent that starts the Foursquare app for authentication. If the user doesn't have the app installed, or has an incompatible version installed, an intent that opens the Foursquare app page on Google Play is returned (you can check for this case with `FoursquareOAuth.isPlayStoreIntent(intent)`). Then call the `startActivityForResult()` method with the retrieved intent.
 ```java
 Intent intent = FoursquareOAuth.getConnectIntent(context, CLIENT_ID);
 startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT);
