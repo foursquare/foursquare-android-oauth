@@ -4,6 +4,8 @@ Foursquare native authentication makes it easier for your app's users to connect
 
 This repo includes an Android library that can be used in your own app. It also includes a simple application as an example of how to use the library.
 
+Native auth will work on Foursquare versions 2013.08.16 and higher---if your users don't have the proper version installed, the library will give them an opportunity to download it in the Play Store (see "Using FoursquareOAuth").
+
 Setting up your app
 ====================
 1. Visit <a href="https://foursquare.com/developers/apps" target="_blank">https://foursquare.com/developers/apps</a>
