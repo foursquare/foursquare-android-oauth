@@ -98,6 +98,7 @@ public class MainActivity extends FragmentActivity {
                 // Otherwise we start the auth flow.
                 if (FoursquareOAuth.isPlayStoreIntent(intent)) {
                     toastMessage(MainActivity.this, getString(R.string.app_not_installed_message));
+                    startActivity(intent);
                 } else {
                     startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT);
                 }

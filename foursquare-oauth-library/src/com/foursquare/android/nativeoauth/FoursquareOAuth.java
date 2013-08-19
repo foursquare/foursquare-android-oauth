@@ -60,7 +60,8 @@ public final class FoursquareOAuth {
     private static final String PARAM_SIGNATURE = "androidKeyHash";
     private static final String PARAM_VERSION = "v";
     
-    private static final String URI_MARKET_PAGE = "market://details?id=com.joelapenna.foursquared";
+    private static final String URI_MARKET_PAGE = "market://details?id=com.joelapenna.foursquared"; 
+    private static final String MARKET_REFERRER = "utm_source=foursquare-android-oauth&utm_term=%s";
     
     private static final String ERROR_CODE_UNSUPPORTED_VERSION = "unsupported_version";
     private static final String ERROR_CODE_INVALID_REQUEST = "invalid_request";
@@ -90,7 +91,7 @@ public final class FoursquareOAuth {
             return intent;
         }
 
-        return getPlayStoreIntent();
+        return getPlayStoreIntent(clientId);
     }
     
     /**
@@ -183,17 +184,30 @@ public final class FoursquareOAuth {
      * @param intent the intent returned by getConnectIntent().
      */
     public static boolean isPlayStoreIntent(Intent intent) {
+        final Uri marketUri = Uri.parse(URI_MARKET_PAGE);
+        Uri uri = intent.getData();
+        
         return intent != null 
                 && Intent.ACTION_VIEW.equals(intent.getAction())
-                && Uri.parse(URI_MARKET_PAGE).equals(intent.getData());
+                && marketUri.getScheme().equals(uri.getScheme())
+                && marketUri.getHost().equals(uri.getHost())
+                && marketUri.getQueryParameter("id").equals(uri.getQueryParameter("id"));
     }
 
     /**
      * Builds an intent that will open the Foursquare app detail page on Google Play.
+     * 
+     * @param clientId The app's clientId for referral tracking.
+     * 
      * @return An intent that will open the Foursquare app detail page on Google Play.
      */
-    private static Intent getPlayStoreIntent() {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse(URI_MARKET_PAGE));
+    private static Intent getPlayStoreIntent(String clientId) {
+        final String referrer = String.format(MARKET_REFERRER, clientId);
+        return new Intent(Intent.ACTION_VIEW, 
+                Uri.parse(URI_MARKET_PAGE)
+                    .buildUpon()
+                    .appendQueryParameter("referrer", referrer)
+                    .build());
     }
     
     /**
