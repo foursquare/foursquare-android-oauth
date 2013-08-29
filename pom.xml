@@ -8,14 +8,15 @@
     <version>7</version>
   </parent>
 
-  <groupId>com.foursquare.android.nativeoauth</groupId>
+  <groupId>com.foursquare</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 
   <packaging>pom</packaging>
 
   <name>Foursquare native OAuth for Android (parent)</name>
   <description>Foursquare native authentication library makes it easier for your app's users to connect with Foursquare.</description>
+  <url>https://github.com/foursquare/foursquare-android-oauth</url>
 
   <modules>
     <module>foursquare-oauth-library</module>
@@ -36,10 +37,18 @@
     </license>
   </licenses>
 
-  <organization>
-    <name>Foursquare Labs, Inc.</name>
-    <url>https://developer.foursquare.com</url>
-  </organization>
+  <developers>
+    <developer>
+      <id>willhou</id>
+      <name>Will Hou</name>
+      <url>http://github.com/willhou</url>
+      <organization>Foursquare</organization>
+      <organizationUrl>http://developer.foursquare.com</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
 
   <issueManagement>
     <system>GitHub Issues</system>
@@ -116,6 +125,20 @@
             <autoVersionSubmodules>true</autoVersionSubmodules>
           </configuration>
         </plugin>
+        
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-gpg-plugin</artifactId>
+			<executions>
+			  <execution>
+				<id>sign-artifacts</id>
+				<phase>verify</phase>
+				<goals>
+				  <goal>sign</goal>
+				</goals>
+			  </execution>
+			</executions>
+	    </plugin>
       </plugins>
     </pluginManagement>
   </build>

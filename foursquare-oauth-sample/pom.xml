@@ -3,16 +3,16 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.foursquare.android.nativeoauth</groupId>
+    <groupId>com.foursquare</groupId>
     <artifactId>parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>sample</artifactId>
+  <artifactId>foursquare-android-nativeoauth-sample</artifactId>
   <packaging>apk</packaging>
 
-  <name>Foursquare native OAuth for Android. Sample</name>
+  <name>Sample: Native Auth</name>
 
   <dependencies>
     <dependency>
@@ -27,7 +27,7 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>library</artifactId>
+      <artifactId>foursquare-android-nativeoauth-lib</artifactId>
       <version>${project.version}</version>
       <type>apklib</type>
     </dependency>
