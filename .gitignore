@@ -1,4 +1,4 @@
-# Anrdoid
+# Android
 bin/
 gen/
 
@@ -13,6 +13,11 @@ gen/
 *.iml
 .idea
 classes
+
+gen-external-apklibs
+
+# Maven build files
+target
 
 # others
 .DS_Store
