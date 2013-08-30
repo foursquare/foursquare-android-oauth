@@ -10,7 +10,7 @@
 
   <groupId>com.foursquare</groupId>
   <artifactId>parent</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <packaging>pom</packaging>
 
@@ -27,7 +27,7 @@
     <url>https://github.com/foursquare/foursquare-android-oauth</url>
     <connection>scm:git:git://github.com/foursquare/foursquare-android-oauth.git</connection>
     <developerConnection>scm:git:git@github.com:foursquare/foursquare-android-oauth.git</developerConnection>
-   <tag>1.0.0</tag>
+   <tag>HEAD</tag>
   </scm>
 
   <licenses>
