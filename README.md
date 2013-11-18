@@ -29,17 +29,6 @@ then locate the directory of the `foursquare-android-oauth` folder. From the Imp
 2. Open your project's properties page, select `Android` on the left panel.
 3. Under the `library` section, select `Add -> fsq-oauth-library -> OK`.
 
-or
-
-If you use Maven to build your Android project, you can simply add this dependency to the `pom.xml` file
-```xml
-<dependency>
-    <groupId>com.foursquare</groupId>
-    <artifactId>foursquare-android-nativeoauth-lib</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-
 Using FoursquareOAuth
 =============
 #### Obtaining an access code
