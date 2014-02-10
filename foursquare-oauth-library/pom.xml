@@ -29,14 +29,22 @@
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
-
     <plugins>
       <plugin>
         <groupId>com.jayway.maven.plugins.android.generation2</groupId>
         <artifactId>android-maven-plugin</artifactId>
         <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>create-all-formats</id>
+            <phase>package</phase>
+            <goals>
+              <goal>aar</goal>
+              <goal>apklib</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
-
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
@@ -49,8 +57,8 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <type>jar</type>
-                  <file>${project.build.directory}/${project.build.finalName}.jar</file>
+                  <type>aar</type>
+                  <file>${project.build.directory}/${project.build.finalName}.aar</file>
                 </artifact>
               </artifacts>
             </configuration>
