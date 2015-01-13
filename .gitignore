@@ -1,6 +1,7 @@
 # Android
 bin/
 gen/
+out/
 
 # Eclipse project files
 .project
@@ -13,11 +14,17 @@ gen/
 *.iml
 .idea
 classes
+local.properties
 
 gen-external-apklibs
 
 # Maven build files
 target
+
+# Gradle
+.gradle
+build/
+Thumbs.db
 
 # others
 .DS_Store

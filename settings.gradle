@@ -1,0 +1,2 @@
+include ':foursquare-oauth-library'
+include ':foursquare-oauth-sample'
