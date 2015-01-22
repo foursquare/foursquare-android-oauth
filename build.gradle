@@ -1,12 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
-
-        maven {
-            url 'http://nexus.prod.foursquare.com/nexus/content/groups/public/'
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
@@ -16,10 +12,5 @@ buildscript {
 allprojects {
     repositories {
         mavenCentral()
-        mavenLocal()
-
-        maven {
-            url 'http://nexus.prod.foursquare.com/nexus/content/groups/public/'
-        }
     }
 }

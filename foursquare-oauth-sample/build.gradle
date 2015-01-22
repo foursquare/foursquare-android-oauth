@@ -1,3 +1,6 @@
+apply plugin: 'android'
+apply plugin: 'maven'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -6,7 +9,6 @@ buildscript {
         classpath 'com.android.tools.build:gradle:1.0.0'
     }
 }
-apply plugin: 'android'
 
 dependencies {
     compile project(':foursquare-oauth-library')

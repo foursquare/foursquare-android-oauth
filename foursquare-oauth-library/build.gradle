@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven'
 
 buildscript {
     repositories {
@@ -39,5 +40,78 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: mavenUser, password: mavenPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: mavenUser, password: mavenPassword)
+            }
+            pom.project {
+
+                parent {
+                    groupId 'org.sonatype.oss'
+                    artifactId 'oss-parent'
+                    version '7'
+                }
+
+
+                groupId 'com.foursquare'
+                artifactId 'foursquare-android-nativeoauth-lib'
+                version '1.0.1-SNAPSHOT'
+
+                packaging 'apklib'
+
+                name 'Foursquare native OAuth for Android'
+                description 'Foursquare native authentication library makes it easier for your app\'s users to connect with Foursquare.'
+                url 'https://github.com/foursquare/foursquare-android-oauth'
+
+                scm {
+                    url 'https://github.com/foursquare/foursquare-android-oauth'
+                    connection 'scm:git:git://github.com/foursquare/foursquare-android-oauth.git'
+                    developerConnection 'scm:git:git@github.com:foursquare/foursquare-android-oauth.git'
+                    tag 'HEAD'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'foursquare'
+                        name 'Foursquare'
+                    }
+                }
+
+                issueManagement {
+                    system 'GitHub Issues'
+                    url 'https://github.com/foursquare/foursquare-android-oauth/issues'
+                }
+
+                dependencies {
+                    dependency {
+                        groupId 'com.google.android'
+                        artifactId 'android'
+                        version '4.1.1.4'
+                    }
+                    dependency {
+                        groupId 'com.google.android'
+                        artifactId 'support-v4'
+                        version 'r7'
+                    }
+                }
+            }
+        }
     }
 }
