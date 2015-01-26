@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
 buildscript {
     repositories {
@@ -8,10 +9,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
     }
-}
-
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 android {
@@ -43,9 +40,20 @@ android {
     }
 }
 
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+signing {
+    required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
 uploadArchives {
     repositories {
         mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                 authentication(userName: mavenUser, password: mavenPassword)
             }
@@ -62,9 +70,9 @@ uploadArchives {
                 }
 
 
-                groupId 'com.foursquare'
-                artifactId 'foursquare-android-nativeoauth-lib'
-                version '1.0.1-SNAPSHOT'
+                groupId GROUP_ID
+                artifactId ARTIFACT_ID
+                version VERSION_NAME
 
                 packaging 'apklib'
 
@@ -104,11 +112,6 @@ uploadArchives {
                         groupId 'com.google.android'
                         artifactId 'android'
                         version '4.1.1.4'
-                    }
-                    dependency {
-                        groupId 'com.google.android'
-                        artifactId 'support-v4'
-                        version 'r7'
                     }
                 }
             }
