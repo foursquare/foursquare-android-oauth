@@ -22,12 +22,19 @@ Setting up your app
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-Setting up the library with your app
-====================================
-1. In your Eclipse workspace, select `File -> Import -> Android -> Existing Android Code into Workspace -> Finish`,
-then locate the directory of the `foursquare-android-oauth` folder. From the Import Projects prompt, make sure to check the `library` project for import.
-2. Open your project's properties page, select `Android` on the left panel.
-3. Under the `library` section, select `Add -> fsq-oauth-library -> OK`.
+Download
+--------
+
+Grab via Maven:
+```xml
+<dependency>
+  <groupId>com.foursquare</groupId>
+  <artifactId>foursquare-android-oauth</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+or Gradle:
+```groovy compile 'com.foursquare:foursquare-android-oauth:1.0.1'
 
 Using FoursquareOAuth
 =============
