@@ -30,7 +30,7 @@ Grab via Maven:
 <dependency>
   <groupId>com.foursquare</groupId>
   <artifactId>foursquare-android-oauth</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 or Gradle:
