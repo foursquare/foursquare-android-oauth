@@ -35,7 +35,7 @@ Grab via Maven:
 ```
 or Gradle:
 ```groovy
-compile 'com.foursquare:foursquare-android-oauth:1.0.1'
+compile 'com.foursquare:foursquare-android-oauth:1.0.3'
 ```
 
 Using FoursquareOAuth
