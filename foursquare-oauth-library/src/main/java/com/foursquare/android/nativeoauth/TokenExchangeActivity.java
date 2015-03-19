@@ -147,7 +147,7 @@ public final class TokenExchangeActivity extends Activity {
         
         private static final long serialVersionUID = 1L;
         
-        private TokenExchangeActivity mActivity;
+        private transient TokenExchangeActivity mActivity;
         
         public TokenExchangeTask(TokenExchangeActivity activity) {
             mActivity = activity;

@@ -84,7 +84,7 @@ public class MainActivity extends FragmentActivity {
         
         TextView tvMessage = (TextView) findViewById(R.id.tvMessage);
         tvMessage.setVisibility(isAuthorized ? View.VISIBLE : View.GONE);
-        
+
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setVisibility(isAuthorized ? View.GONE : View.VISIBLE);
         btnLogin.setOnClickListener(new OnClickListener() {
@@ -92,7 +92,7 @@ public class MainActivity extends FragmentActivity {
             public void onClick(View v) {
                 // Start the native auth flow.
                 Intent intent = FoursquareOAuth.getConnectIntent(MainActivity.this, CLIENT_ID);
-                
+
                 // If the device does not have the Foursquare app installed, we'd
                 // get an intent back that would open the Play Store for download.
                 // Otherwise we start the auth flow.
