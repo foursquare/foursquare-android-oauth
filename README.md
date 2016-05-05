@@ -67,7 +67,7 @@ The `AuthCodeResponse` object has two members:
     * `FoursquareCancelException` - User pressed the back button in the authorization screen.
     * `FoursquareDenyException` - User pressed the deny button in the authorization screen.
     * `FoursquareUnsupportedVersionException` - The version of the Foursquare app installed on the user's device is too old to support native auth.
-    * `FoursquareInvalidRequestException` - Malformed connect request uri that the Foursquare app is not able to interpret, such as missing client id or version number. If you are using `FSOauth.getConnectIntent()` to start the oauth prcoess, you can ignore this exception as FSOauth creates the connect uri for you.
+    * `FoursquareInvalidRequestException` - Malformed connect request uri that the Foursquare app is not able to interpret, such as missing client id or version number. If you are using `FoursquareOAuth.getConnectIntent()` to start the oauth prcoess, you can ignore this exception as FoursquareOAuth creates the connect uri for you.
     * `FoursquareOAuthException` - An error occurred in the OAuth process. Call `FoursquareOAuthException.getErrorCode()` to obtain one of the error codes listed at http://tools.ietf.org/html/rfc6749#section-5.2
     * `FoursquareInternalErrorException` - An internal error occurred during authorization. Call `exception.getCause()` to inspect the original cause of the exception.
 
@@ -84,19 +84,19 @@ Add the `TokenExchangeActivity` to your `AndroidManifest.xml`
       android:theme="@android:style/Theme.Dialog" />
 ```
 
-The steps are very similar to obtaining an access code. Call `FSOauth.getTokenExchangeIntent()` with your application's client id, secret and access code to obtain an intent that starts the `TokenExchangeActivity` to convert a short-lived code into an access token. Then call the `startActivityForResult()` method with the retrieved intent.
+The steps are very similar to obtaining an access code. Call `FoursquareOAuth.getTokenExchangeIntent()` with your application's client id, secret and access code to obtain an intent that starts the `TokenExchangeActivity` to convert a short-lived code into an access token. Then call the `startActivityForResult()` method with the retrieved intent.
 ```java
-Intent intent = FSOauth.getTokenExchangeIntent(context, CLIENT_ID, CLIENT_SECRET, authCode);
+Intent intent = FoursquareOAuth.getTokenExchangeIntent(context, CLIENT_ID, CLIENT_SECRET, authCode);
 startActivityForResult(intent, REQUEST_CODE_FSQ_TOKEN_EXCHANGE);
 ```
 
-When the token exchange completes, the `onActivityResult()` method of your initiating `Activity` or `Fragment` will be triggered. Call `FSOauth.getTokenFromResult()` with the resultCode and data intent to obtain an `AccessTokenResponse` object.
+When the token exchange completes, the `onActivityResult()` method of your initiating `Activity` or `Fragment` will be triggered. Call `FoursquareOAuth.getTokenFromResult()` with the resultCode and data intent to obtain an `AccessTokenResponse` object.
 ```java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     switch (requestCode) {
         case REQUEST_CODE_FSQ_TOKEN_EXCHANGE:
-            AccessTokenResponse tokenResponse = FSOauth.getTokenFromResult(resultCode, data);
+            AccessTokenResponse tokenResponse = FoursquareOAuth.getTokenFromResult(resultCode, data);
             /* ... */
             break;
     }
