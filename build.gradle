@@ -2,22 +2,24 @@
 
 buildscript {
     ext {
-        COMPILE_SDK_VERSION = 21
-        BUILD_TOOLS_VERSION = "21.1.2"
-        MIN_SDK_VERSION = 8
-        TARGET_SDK_VERSION = 21
+        COMPILE_SDK_VERSION = 26
+        BUILD_TOOLS_VERSION = "26.0.2"
+        MIN_SDK_VERSION = 14
+        TARGET_SDK_VERSION = 26
     }
 
     repositories {
         mavenCentral()
+        maven { url "https://maven.google.com" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 
 allprojects {
     repositories {
         mavenCentral()
+        maven { url "https://maven.google.com" }
     }
 }
