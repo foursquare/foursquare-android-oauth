@@ -82,10 +82,10 @@ public class MainActivity extends FragmentActivity {
     private void ensureUi() {
         boolean isAuthorized = !TextUtils.isEmpty(ExampleTokenStore.get().getToken());
         
-        TextView tvMessage = (TextView) findViewById(R.id.tvMessage);
+        TextView tvMessage = findViewById(R.id.tvMessage);
         tvMessage.setVisibility(isAuthorized ? View.VISIBLE : View.GONE);
 
-        Button btnLogin = (Button) findViewById(R.id.btnLogin);
+        Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setVisibility(isAuthorized ? View.GONE : View.VISIBLE);
         btnLogin.setOnClickListener(new OnClickListener() {
             @Override
@@ -164,7 +164,7 @@ public class MainActivity extends FragmentActivity {
         } else {
             if (exception instanceof FoursquareOAuthException) {
                 // OAuth error.
-                String errorMessage = ((FoursquareOAuthException) exception).getMessage();
+                String errorMessage = exception.getMessage();
                 String errorCode = ((FoursquareOAuthException) exception).getErrorCode();
                 toastMessage(this, errorMessage + " [" + errorCode + "]");
                 

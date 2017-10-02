@@ -1,20 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'maven'
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
-    }
-}
-
-dependencies {
-    compile project(':foursquare-oauth-library')
-    compile 'com.android.support:support-v4:21.0.3'
-}
-
 android {
     compileSdkVersion COMPILE_SDK_VERSION
     buildToolsVersion BUILD_TOOLS_VERSION
@@ -23,4 +9,9 @@ android {
         minSdkVersion MIN_SDK_VERSION
         targetSdkVersion TARGET_SDK_VERSION
     }
+}
+
+dependencies {
+    compile project(':foursquare-oauth-library')
+    compile 'com.android.support:support-fragment:26.1.0'
 }

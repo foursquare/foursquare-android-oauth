@@ -19,8 +19,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -134,13 +132,7 @@ public final class TokenExchangeActivity extends Activity {
     
     @SuppressLint("InlinedApi")
     private int getThemeRes() {
-        if (VERSION.SDK_INT < VERSION_CODES.HONEYCOMB) {
-            return android.R.style.Theme_Dialog;
-        } else if (VERSION.SDK_INT < VERSION_CODES.ICE_CREAM_SANDWICH) {
-            return android.R.style.Theme_Holo_Light_Dialog_NoActionBar_MinWidth;
-        } else {
-            return android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth;
-        }
+        return android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth;
     }
     
     static class TokenExchangeTask extends AsyncTask<String, Void, AccessTokenResponse> implements Serializable {
