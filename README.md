@@ -30,12 +30,12 @@ Grab via Maven:
 <dependency>
   <groupId>com.foursquare</groupId>
   <artifactId>foursquare-android-oauth</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-compile 'com.foursquare:foursquare-android-oauth:1.0.3'
+compile 'com.foursquare:foursquare-android-oauth:1.0.4'
 ```
 
 Using FoursquareOAuth
