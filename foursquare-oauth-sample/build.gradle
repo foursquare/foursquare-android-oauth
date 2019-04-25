@@ -12,6 +12,6 @@ android {
 }
 
 dependencies {
-    compile project(':foursquare-oauth-library')
-    compile 'com.android.support:support-fragment:26.1.0'
+    implementation project(':foursquare-oauth-library')
+    implementation 'com.android.support:support-fragment:26.1.0'
 }
