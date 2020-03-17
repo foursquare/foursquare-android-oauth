@@ -1,15 +1,19 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion versions.sdk.compile
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
+        minSdkVersion versions.sdk.min
+        targetSdkVersion versions.sdk.target
     }
+}
+
+dependencies {
+    implementation deps.kotlin.stdlib
 }
 
 def isReleaseBuild() {

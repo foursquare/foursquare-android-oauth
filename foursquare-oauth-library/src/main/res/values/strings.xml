@@ -17,4 +17,8 @@
 
     <string name="loading">Talking to Foursquare servers…</string>
 
+    <!-- Native Oauth -->
+    <string name="invalid_connect_request">Hm, something went wrong (invalid connect request).</string>
+    <string name="unsupported_version">To connect, you\'ll need the latest version of Foursquare installed.</string>
+
 </resources>

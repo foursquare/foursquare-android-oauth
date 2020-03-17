@@ -1,17 +1,34 @@
 apply plugin: 'com.android.application'
-apply plugin: 'maven'
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion COMPILE_SDK_VERSION
-    buildToolsVersion BUILD_TOOLS_VERSION
+    compileSdkVersion versions.sdk.compile
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file("sample.keystore")
+            storePassword "sample"
+            keyAlias "sample"
+            keyPassword "sample"
+        }
+    }
 
     defaultConfig {
-        minSdkVersion MIN_SDK_VERSION
-        targetSdkVersion TARGET_SDK_VERSION
+        minSdkVersion versions.sdk.min
+        targetSdkVersion versions.sdk.target
+
+        signingConfig signingConfigs.release
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
     }
 }
 
 dependencies {
-    compile project(':foursquare-oauth-library')
-    compile 'com.android.support:support-fragment:26.1.0'
+    implementation project(':foursquare-oauth-library')
+    implementation 'com.android.support:support-fragment:28.0.0'
+    implementation deps.kotlin.stdlib
 }

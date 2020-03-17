@@ -42,19 +42,19 @@ public final class FoursquareOAuth {
 
     private static final String PACKAGE = "com.joelapenna.foursquared";
     
-    private static final String INTENT_RESULT_CODE = PACKAGE
+    protected static final String INTENT_RESULT_CODE = PACKAGE
             + ".fragments.OauthWebviewFragment.INTENT_RESULT_CODE";
-    
-    private static final String INTENT_RESULT_ERROR = PACKAGE
+
+    protected static final String INTENT_RESULT_ERROR = PACKAGE
             + ".fragments.OauthWebviewFragment.INTENT_RESULT_ERROR";
-    
-    private static final String INTENT_RESULT_DENIED = PACKAGE
+
+    protected static final String INTENT_RESULT_DENIED = PACKAGE
             + ".fragments.OauthWebviewFragment.INTENT_RESULT_DENIED";
-    
-    private static final String INTENT_RESULT_ERROR_MESSAGE = PACKAGE
+
+    protected static final String INTENT_RESULT_ERROR_MESSAGE = PACKAGE
             + ".fragments.OauthWebviewFragment.INTENT_RESULT_ERROR_MESSAGE";
 
-    private static final String URI_SCHEME = "foursquareauth";
+    private static final String URI_SCHEME = "foursquareauthbadtest";
     private static final String URI_AUTHORITY = "authorize";
     private static final String PARAM_CLIENT_ID = "client_id";
     private static final String PARAM_SIGNATURE = "androidKeyHash";
@@ -91,7 +91,10 @@ public final class FoursquareOAuth {
             return intent;
         }
 
-        return getPlayStoreIntent(clientId);
+        intent = new Intent(context, FoursquareOAuthWebviewActivity.class);
+        intent.setData(builder.build());
+
+        return intent;
     }
     
     /**
@@ -187,8 +190,7 @@ public final class FoursquareOAuth {
         final Uri marketUri = Uri.parse(URI_MARKET_PAGE);
         Uri uri = intent.getData();
         
-        return intent != null 
-                && Intent.ACTION_VIEW.equals(intent.getAction())
+        return Intent.ACTION_VIEW.equals(intent.getAction())
                 && marketUri.getScheme().equals(uri.getScheme())
                 && marketUri.getHost().equals(uri.getHost())
                 && marketUri.getQueryParameter("id").equals(uri.getQueryParameter("id"));
@@ -203,11 +205,17 @@ public final class FoursquareOAuth {
      */
     private static Intent getPlayStoreIntent(String clientId) {
         final String referrer = String.format(MARKET_REFERRER, clientId);
-        return new Intent(Intent.ACTION_VIEW, 
-                Uri.parse(URI_MARKET_PAGE)
-                    .buildUpon()
-                    .appendQueryParameter("referrer", referrer)
-                    .build());
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://play.google.com/store/apps/details")
+            .buildUpon()
+            .appendQueryParameter("id", URI_MARKET_PAGE)
+            .appendQueryParameter("referrer", referrer)
+            .build()
+        );
+        intent.setPackage("com.android.vending");
+
+        return intent;
     }
     
     /**
