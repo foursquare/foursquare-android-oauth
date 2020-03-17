@@ -191,7 +191,6 @@ public class FoursquareOAuthWebviewActivity extends Activity {
      * Called when the Activity is visible to the user and actively running.
      * Resumes the WebView.
      */
-    @SuppressLint("NewApi")
     @Override
     public void onPause() {
         super.onPause();
@@ -216,7 +215,6 @@ public class FoursquareOAuthWebviewActivity extends Activity {
     /**
      * Called when the fragment is no longer resumed. Pauses the WebView.
      */
-    @SuppressLint("NewApi")
     @Override
     public void onResume() {
         ensureCookieSyncManagerAvailable();

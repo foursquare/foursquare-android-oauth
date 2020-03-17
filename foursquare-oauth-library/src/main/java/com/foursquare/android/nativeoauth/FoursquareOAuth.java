@@ -54,7 +54,7 @@ public final class FoursquareOAuth {
     protected static final String INTENT_RESULT_ERROR_MESSAGE = PACKAGE
             + ".fragments.OauthWebviewFragment.INTENT_RESULT_ERROR_MESSAGE";
 
-    private static final String URI_SCHEME = "foursquareauthbadtest";
+    private static final String URI_SCHEME = "foursquareauth";
     private static final String URI_AUTHORITY = "authorize";
     private static final String PARAM_CLIENT_ID = "client_id";
     private static final String PARAM_SIGNATURE = "androidKeyHash";
