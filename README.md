@@ -25,23 +25,14 @@ Setting up your app
 Download
 --------
 
-Grab via Maven:
-```xml
-<dependency>
-  <groupId>com.foursquare</groupId>
-  <artifactId>foursquare-android-oauth</artifactId>
-  <version>1.0.3</version>
-</dependency>
-```
-or Gradle:
 ```groovy
-compile 'com.foursquare:foursquare-android-oauth:1.0.3'
+compile 'com.foursquare:foursquare-android-oauth:1.1.0'
 ```
 
 Using FoursquareOAuth
 =============
 #### Obtaining an access code
-Call `FoursquareOAuth.getConnectIntent()` with your application's client id to retrieve an intent that starts the Foursquare app for authentication. If the user doesn't have the app installed, or has an incompatible version installed, an intent that opens the Foursquare app page on Google Play is returned (you can check for this case with `FoursquareOAuth.isPlayStoreIntent(intent)`). Then call the `startActivityForResult()` method with the retrieved intent.
+Call `FoursquareOAuth.getConnectIntent()` with your application's client id to retrieve an intent that starts the Foursquare app for authentication or a fallback if the user does not have the Foursquare app installed. Once you have the intent, call the `startActivityForResult()` method with the retrieved intent.
 ```java
 Intent intent = FoursquareOAuth.getConnectIntent(context, CLIENT_ID);
 startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT);
@@ -77,13 +68,6 @@ You should pass the returned access code to your own server and have it contact 
 #### Obtaining an access token (client-side)
 *WARNING:* For security reasons, it is recommended that you not use the following method if possible. However, this helper method is provided for you to use if this is not possible for your app.
 
-Add the `TokenExchangeActivity` to your `AndroidManifest.xml`
-```xml
-<activity
-      android:name="com.foursquare.android.nativeoauth.TokenExchangeActivity"
-      android:theme="@android:style/Theme.Dialog" />
-```
-
 The steps are very similar to obtaining an access code. Call `FoursquareOAuth.getTokenExchangeIntent()` with your application's client id, secret and access code to obtain an intent that starts the `TokenExchangeActivity` to convert a short-lived code into an access token. Then call the `startActivityForResult()` method with the retrieved intent.
 ```java
 Intent intent = FoursquareOAuth.getTokenExchangeIntent(context, CLIENT_ID, CLIENT_SECRET, authCode);
@@ -111,7 +95,7 @@ The `AccessTokenResponse` object has two members:
 
 License
 =======
-    Copyright (C) 2013 Foursquare Labs, Inc.
+    Copyright (C) 2020 Foursquare Labs, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
