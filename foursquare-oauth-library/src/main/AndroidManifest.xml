@@ -3,4 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionCode="0"
     android:versionName="0">
+
+    <application>
+        <activity android:name="com.foursquare.android.nativeoauth.FoursquareOAuthWebviewActivity" />
+        <activity android:name="com.foursquare.android.nativeoauth.TokenExchangeActivity" />
+    </application>
 </manifest>
