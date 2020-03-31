@@ -16,6 +16,7 @@
 package com.foursquare.android.nativeoauth;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -36,7 +37,7 @@ import java.util.List;
 /**
  * Main implementation of Foursquare authentication.
  * 
- * @date 2013-06-01
+ * date 2013-06-01
  */
 public final class FoursquareOAuth {
 
@@ -76,18 +77,20 @@ public final class FoursquareOAuth {
      * 
      * @param context 
      *          The context to use. Usually your Application or Activity object.
-     * @param clientId
+     * @param clientId unique id of client
+     * @param useWebView force using webView even if Foursquare client is installed
      */
-    public static Intent getConnectIntent(Context context, String clientId) {
+    public static Intent getConnectIntent(Context context, String clientId, Boolean useWebView) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(URI_SCHEME);
         builder.authority(URI_AUTHORITY);
         builder.appendQueryParameter(PARAM_CLIENT_ID, clientId);
         builder.appendQueryParameter(PARAM_VERSION, String.valueOf(LIB_VERSION));
         builder.appendQueryParameter(PARAM_SIGNATURE, getSignatureFingerprint(context));
-        
+
+
         Intent intent = new Intent(Intent.ACTION_VIEW, builder.build());
-        if (isIntentAvailable(context, intent)) {
+        if (isIntentAvailable(context, intent) && !useWebView) {
             return intent;
         }
 
@@ -95,6 +98,11 @@ public final class FoursquareOAuth {
         intent.setData(builder.build());
 
         return intent;
+    }
+
+    @SuppressWarnings("unused")
+    public static Intent getConnectIntent(Context context, String clientId) {
+        return getConnectIntent(context, clientId, false);
     }
     
     /**
