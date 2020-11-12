@@ -82,14 +82,6 @@ uploadArchives {
                     system 'GitHub Issues'
                     url 'https://github.com/foursquare/foursquare-android-oauth/issues'
                 }
-
-                dependencies {
-                    dependency {
-                        groupId 'com.google.android'
-                        artifactId 'android'
-                        version '4.1.1.4'
-                    }
-                }
             }
         }
     }

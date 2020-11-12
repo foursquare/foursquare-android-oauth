@@ -16,17 +16,12 @@ Setting up your app
 5. Note that you can add multiple key hashes delimited by commas.
 6. Click "Save Changes".
 7. Copy the client id and secret as a string into your project. For security reasons, you should encrypt or obfuscate the id and secret.
-8. Include the internet permission in your app's `AndroidManifest.xml` file.
-
-```xml
-<uses-permission android:name="android.permission.INTERNET" />
-```
 
 Download
 --------
 
 ```groovy
-compile 'com.foursquare:foursquare-android-oauth:1.1.0'
+compile 'com.foursquare:foursquare-android-oauth:1.1.1'
 ```
 
 Using FoursquareOAuth
