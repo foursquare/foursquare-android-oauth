@@ -1,11 +1,11 @@
 ext.versions = [
-        sdk: [
-                min: 19,
+        sdk          : [
+                min: 18,
                 target: 29,
                 compile: 29
         ],
-        androidPlugin: '3.5.3',
-        kotlin: "1.3.31",
+        androidPlugin: '3.6.1',
+        kotlin       : "1.3.71",
 ]
 
 ext.deps = [

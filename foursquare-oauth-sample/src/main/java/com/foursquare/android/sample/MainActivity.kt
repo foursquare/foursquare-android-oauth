@@ -60,19 +60,32 @@ class MainActivity : FragmentActivity() {
         val tvMessage = findViewById<TextView>(R.id.tvMessage)
         tvMessage.visibility = if (isAuthorized) View.VISIBLE else View.GONE
         val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnLoginWeb = findViewById<Button>(R.id.btnLoginWeb)
+        val txtLoginWeb = findViewById<TextView>(R.id.txtLoginWeb)
         btnLogin.visibility = if (isAuthorized) View.GONE else View.VISIBLE
+        btnLoginWeb.visibility = if (isAuthorized) View.GONE else View.VISIBLE
+        txtLoginWeb.visibility = if (isAuthorized) View.GONE else View.VISIBLE
+
         btnLogin.setOnClickListener {
-            // Start the native auth flow.
-            val intent = FoursquareOAuth.getConnectIntent(this@MainActivity, CLIENT_ID)
-            // If the device does not have the Foursquare app installed, we'd
-            // get an intent back that would open the Play Store for download.
-            // Otherwise we start the auth flow.
-            if (FoursquareOAuth.isPlayStoreIntent(intent)) {
-                toastMessage(this@MainActivity, getString(R.string.app_not_installed_message))
-                startActivity(intent)
-            } else {
-                startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT)
-            }
+            authClick()
+        }
+
+        btnLoginWeb.setOnClickListener{
+           authClick(true)
+        }
+    }
+
+    private fun authClick(useWebView: Boolean = false){
+        // Start the native auth flow.
+        val intent = FoursquareOAuth.getConnectIntent(this@MainActivity, CLIENT_ID, useWebView)
+        // If the device does not have the Foursquare app installed, we'd
+        // get an intent back that would open the Play Store for download.
+        // Otherwise we start the auth flow.
+        if (FoursquareOAuth.isPlayStoreIntent(intent)) {
+            toastMessage(this@MainActivity, getString(R.string.app_not_installed_message))
+            startActivity(intent)
+        } else {
+            startActivityForResult(intent, REQUEST_CODE_FSQ_CONNECT)
         }
     }
 
@@ -83,20 +96,23 @@ class MainActivity : FragmentActivity() {
             val code = codeResponse.code
             performTokenExchange(code)
         } else {
-            if (exception is FoursquareCancelException) { // Cancel.
-                toastMessage(this, "Canceled")
-            } else if (exception is FoursquareDenyException) { // Deny.
-                toastMessage(this, "Denied")
-            } else if (exception is FoursquareOAuthException) { // OAuth error.
-                val errorMessage = exception.message
-                val errorCode = exception.errorCode
-                toastMessage(this, "$errorMessage [$errorCode]")
-            } else if (exception is FoursquareUnsupportedVersionException) { // Unsupported Fourquare app version on the device.
-                toastError(this, exception)
-            } else if (exception is FoursquareInvalidRequestException) { // Invalid request.
-                toastError(this, exception)
-            } else { // Error.
-                toastError(this, exception)
+            when (exception) {
+                // Cancel
+                is FoursquareCancelException -> toastMessage(this, "Canceled")
+                // Deny
+                is FoursquareDenyException -> toastMessage(this, "Denied")
+                // OAuth error
+                is FoursquareOAuthException -> {
+                    val errorMessage = exception.message
+                    val errorCode = exception.errorCode
+                    toastMessage(this, "$errorMessage [$errorCode]")
+                }
+                // Unsupported Fourquare app version on the device
+                is FoursquareUnsupportedVersionException -> toastError(this, exception)
+                // Invalid request
+                is FoursquareInvalidRequestException -> toastError(this, exception)
+                // Error
+                else -> toastError(this, exception)
             }
         }
     }

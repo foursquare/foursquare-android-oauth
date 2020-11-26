@@ -18,7 +18,7 @@
     android:layout_height="match_parent"
     android:background="#e8e3dc"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvMessage"
@@ -33,6 +33,20 @@
 
     <Button
         android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:background="@drawable/connect_to_foursquare_blue" />
+
+    <TextView
+        android:id="@+id/txtLoginWeb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/connect_foursquare_web"
+        android:textSize="15sp"/>
+
+    <Button
+        android:id="@+id/btnLoginWeb"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:background="@drawable/connect_to_foursquare_blue" />
